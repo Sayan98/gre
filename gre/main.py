@@ -40,12 +40,19 @@ def show(vocab):
 
 @click.command()
 @click.pass_obj
+def flash(vocab):
+    """Flash cards"""
+    vocab.flash()
+
+@click.command()
+@click.pass_obj
 def nuke(vocab):
     """Delete entire vocabulary"""
     vocab.nuke()
 
 cli.add_command(add)
 cli.add_command(get)
+cli.add_command(flash)
 cli.add_command(remove)
 cli.add_command(show)
 cli.add_command(nuke)

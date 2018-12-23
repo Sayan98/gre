@@ -2,6 +2,9 @@
 
 import click
 import os
+import random
+import sys
+import time
 from tinydb import TinyDB, Query
 from wiktionaryparser import WiktionaryParser
 
@@ -27,9 +30,18 @@ class Vocab:
         for doc in self.db.all():
             self.display(doc)
 
-    def display(self, data):
+    def flash(self):
+        doc = random.choice(self.db.all())
+        self.display(doc, flash=True)
+
+    def display(self, data, flash=False):
         print()
         click.secho(data["word"].capitalize(), bold=True)
+
+        if flash:
+            input("Press return key to show definition")
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K")
 
         for pos, defn in data["definitions"].items():
             click.echo("(" + click.style(pos, fg="yellow") + ") " + defn)
@@ -40,13 +52,16 @@ class Vocab:
         self.db.purge()
 
     def add_word(self, word):
+        assert isinstance(word, str)
+
+        word = word.lower()
         definitions = self.__get_definition(word)
+
         data = {
         "word": word,
         "definitions": definitions
         }
 
-        assert isinstance(word, str)
 
         self.db.insert(data)
 
