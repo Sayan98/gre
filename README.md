@@ -18,6 +18,7 @@ Run `pip install gre`
 ## usage
 
 ```bash
+
 Usage: gre [OPTIONS] COMMAND [ARGS]...
 
   A handy helper to manage GRE Vocab preparation
@@ -28,10 +29,12 @@ Options:
 
 Commands:
   add     Add a word/words to vocabulary
+  flash   Flash cards
   get     Retrieve a word, definiton from vocabulary
   nuke    Delete entire vocabulary
   remove  Remove a word/words from vocabulary
   show    Print entire vocabulary
+
 ```
 
 ## author
