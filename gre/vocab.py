@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
+import click
 from tinydb import TinyDB, Query
+from wiktionaryparser import WiktionaryParser
+
 
 class Vocab:
     def __init__(self, debug=False):
         self.debug = debug
         self.db = TinyDB("gre_vocab.json")
+        self.parser = WiktionaryParser()
 
     def add(self, words):
         for word in words:
@@ -17,22 +21,44 @@ class Vocab:
 
     def show(self):
         for doc in self.db.all():
-            print(doc["word"])
+            self.display(doc)
+
+    def display(self, data):
+        print()
+        click.secho(data["word"].capitalize(), bold=True, underline=True)
+
+        for pos, defn in data["definitions"].items():
+            click.echo("(" + click.style(pos, fg="yellow") + ")")
+            click.secho(defn)
+
+        print()
+
+    def nuke(self):
+        self.db.purge()
 
     def add_word(self, word):
-        definition = self.__get_definition(word)
+        definitions = self.__get_definition(word)
         data = {
         "word": word,
-        "definition": definition
+        "definitions": definitions
         }
 
         assert isinstance(word, str)
-        assert isinstance(definition, str)
 
         self.db.insert(data)
 
     def __get_definition(self, word):
-        return "<placeholder>"
+        response = self.parser.fetch(word)
+        definitions = response[0]['definitions']
+        data = dict()
+
+        for entry in definitions:
+            pos = entry['partOfSpeech']
+            definition = entry['text'][1]
+
+            data[pos] = definition
+
+        return data
 
     def remove_word(self, word):
         assert isinstance(word, str)
@@ -54,4 +80,4 @@ class Vocab:
 
         if len(results) != 0:
             for doc in results:
-                print(doc["word"])
+                self.display(doc)
