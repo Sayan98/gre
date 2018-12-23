@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
+import pathlib
 from setuptools import setup, find_packages
+
+BASE = pathlib.Path(__file__).parent
+README = (BASE / "README.md").read_text()
 
 setup(
     name='gre',
@@ -8,7 +12,7 @@ setup(
     description='A handy helper to manage GRE Vocab preparation',
     author='Sayan Goswami',
     author_email='<goswami.sayan47@gmail.com>',
-    long_description='README.md',
+    long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/Sayan98/gre',
     license='MIT',

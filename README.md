@@ -1,7 +1,13 @@
 # $gre_
 GRE vocab helper
 
-## install *(from source)*
+## install
+
+#### from pypi
+
+Run `pip install gre`
+
+#### from source
 
 - Clone repo/download as zip
 - `cd` to the folder
