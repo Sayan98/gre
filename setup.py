@@ -8,7 +8,7 @@ README = (BASE / "README.md").read_text()
 
 setup(
     name='gre',
-    version='0.1.1',
+    version='0.1.2',
     description='A handy helper to manage GRE Vocab preparation',
     author='Sayan Goswami',
     author_email='<goswami.sayan47@gmail.com>',

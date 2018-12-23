@@ -62,8 +62,8 @@ class Vocab:
         "definitions": definitions
         }
 
-
         self.db.insert(data)
+        self.display(data)
 
     def __get_definition(self, word):
         response = self.parser.fetch(word)
