@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 
 import click
+import os
 from tinydb import TinyDB, Query
 from wiktionaryparser import WiktionaryParser
 
+BASE_PATH = os.path.expanduser("~")
+VOCAB_DB = os.path.join(BASE_PATH, "gre_vocab.json")
 
 class Vocab:
     def __init__(self, debug=False):
         self.debug = debug
-        self.db = TinyDB("gre_vocab.json")
+        os.system(f"touch {VOCAB_DB}")
+        self.db = TinyDB(VOCAB_DB)
         self.parser = WiktionaryParser()
 
     def add(self, words):
@@ -25,11 +29,10 @@ class Vocab:
 
     def display(self, data):
         print()
-        click.secho(data["word"].capitalize(), bold=True, underline=True)
+        click.secho(data["word"].capitalize(), bold=True)
 
         for pos, defn in data["definitions"].items():
-            click.echo("(" + click.style(pos, fg="yellow") + ")")
-            click.secho(defn)
+            click.echo("(" + click.style(pos, fg="yellow") + ") " + defn)
 
         print()
 
