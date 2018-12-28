@@ -53,7 +53,7 @@ class Vocab:
         data = map(lambda entry: entry["word"],
                    sorted(data, key=lambda entry: entry["word"]))
 
-        with open(os.path.join(path, "voacb.txt"), "wt") as fp:
+        with open(os.path.join(path, "vocab.txt"), "wt") as fp:
             for word in data:
                 fp.write(word)
                 fp.write("\n")
