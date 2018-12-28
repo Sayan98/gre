@@ -45,16 +45,25 @@ def flash(vocab):
     vocab.flash()
 
 @click.command()
+@click.argument('path')
+@click.pass_obj
+def export(vocab, path):
+    """Export vocabulary to file"""
+    vocab.export(path)
+
+@click.command()
 @click.pass_obj
 def nuke(vocab):
     """Delete entire vocabulary"""
     vocab.nuke()
+
 
 cli.add_command(add)
 cli.add_command(get)
 cli.add_command(flash)
 cli.add_command(remove)
 cli.add_command(show)
+cli.add_command(export)
 cli.add_command(nuke)
 
 cli()

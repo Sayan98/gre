@@ -48,6 +48,17 @@ class Vocab:
 
         print()
 
+    def export(self, path):
+        data = self.db.all()
+        data = map(lambda entry: entry["word"],
+                   sorted(data, key=lambda entry: entry["word"]))
+
+        with open(os.path.join(path, "voacb.txt"), "wt") as fp:
+            for word in data:
+                fp.write(word)
+                fp.write("\n")
+
+
     def nuke(self):
         self.db.purge()
 

@@ -17,7 +17,7 @@ Run `pip install gre`
 
 ## usage
 
-```bash
+```
 
 Usage: gre [OPTIONS] COMMAND [ARGS]...
 
@@ -29,6 +29,7 @@ Options:
 
 Commands:
   add     Add a word/words to vocabulary
+  export  Export vocabulary to file
   flash   Flash cards
   get     Retrieve a word, definiton from vocabulary
   nuke    Delete entire vocabulary
