@@ -1,5 +1,7 @@
-# $gre_
-GRE vocab helper
+# $ gre_
+[![PyPI version](https://badge.fury.io/py/gre.svg)](https://pypi.org/project/gre/)
+
+A handy helper to manage GRE Vocab preparation.
 
 ## install
 
