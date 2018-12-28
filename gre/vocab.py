@@ -19,8 +19,11 @@ class Vocab:
         self.parser = WiktionaryParser()
 
     def add(self, words):
+        vocab = set(map(lambda entry: entry['word'], self.db.all()))
+
         for word in words:
-            self.add_word(word)
+            if not word in vocab:
+                self.add_word(word)
 
     def remove(self, words):
         for word in words:
